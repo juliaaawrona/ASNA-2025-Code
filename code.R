@@ -73,3 +73,23 @@ org <- read.csv("test.csv")
 combined_data <- cbind(org$CustomerID, test_data$Predicted_Class)
 colnames(combined_data) <- c("CustomerID", "Claim over 1k")
 write.csv(combined_data, file = "claimover1k_submission.csv", row.names = FALSE)
+
+## Plotting actual vs. predicted values
+plot_data <- data.frame(
+  Actual = data$Claim.over.1k,            # Actual values
+  Predicted = data$predicted_prob        # Predicted probabilities
+)
+
+# Create the plot
+graph <- ggplot(plot_data, aes(x = Predicted, y = Actual)) +
+  geom_point(alpha = 0.5) +  # Scatter plot with transparency
+  geom_smooth(method = "loess", col = "blue") +  # Adds a smooth line (e.g., loess smoothing)
+  labs(
+    title = "Predicted Probabilities vs Actual Values",
+    x = "Predicted Probability",
+    y = "Actual Value"
+  ) +
+  theme_minimal()  # Use a minimal theme
+
+# Save the plot as a PNG
+ggsave("predicted_vs_actual.png", plot = graph, width = 8, height = 6, dpi = 300)
