@@ -92,4 +92,4 @@ graph <- ggplot(plot_data, aes(x = Predicted, y = Actual)) +
   theme_minimal()  # Use a minimal theme
 
 # Save the plot as a PNG
-ggsave("predicted_vs_actual.png", plot = graph, width = 8, height = 6, dpi = 300)
+ggsave("predicted_vs_actual.jpg", plot = graph, width = 8, height = 6, dpi = 300)
